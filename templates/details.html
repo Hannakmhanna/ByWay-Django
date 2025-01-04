@@ -1,0 +1,681 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ByWay</title>
+
+    <link rel="stylesheet" href="{% static 'details.css' %}" type="text/css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'images/assets/logo.svg' %}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:image" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <div class="logo">
+          <a href="#">
+            <div class="bg1">
+              <img src="{% static 'images/assets/logo.svg' %}" alt="Logo" />
+            </div>
+            <h1>Byway</h1>
+          </a>
+        </div>
+        <div class="right">
+          <div class="menu-icon"><i class="fas fa-bars"></i></div>
+          <div class="close-icon" style="display: none">
+            <i class="fa-solid fa-square-xmark"></i>
+          </div>
+          <ul>
+            <li class="whislist">
+              <a href="#"
+                ><img
+                  src="{% static 'images/assets/wishlist.svg' %}"
+                  alt="Cart"
+              /></a>
+            </li>
+            <li class="cart">
+              <a href="#"
+                ><img src="{% static 'images/assets/cart.svg' %}" alt="Cart"
+              /></a>
+            </li>
+            <li class="bell">
+              <a href="#"
+                ><img src="{% static 'images/assets/bell.svg' %}" alt="Cart"
+              /></a>
+            </li>
+            <li class="account">
+              <a href="#">J</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <section class="course-section">
+      <div class="wrapper">
+          <div class="details">
+              <div class="left">
+                  <div class="breadcrumb">
+                      <a href="{% url 'home' %}" class="breadcrumb-link">Home</a>
+                      <span class="breadcrumb-separator">›</span>
+                      <a href="{% url 'courses' %}" class="breadcrumb-link">Courses</a>
+                      <span class="breadcrumb-separator">›</span>
+                      <span class="breadcrumb-current">{{ course.title }}</span>
+                  </div>
+  
+                  <div class="course-info">
+                      <h1 class="course-title">{{ course.title }}</h1>
+                      <p class="course-summary">{{ course.description }}</p>
+                      <div class="course-meta">
+                          <span class="rating">{{ course.ratings }}</span>
+                          <span class="stars"><span class="filled">★★★★★</span></span>
+                          <span class="reviews">({{ course.total_reviews }} ratings)</span>
+                          <span class="details">
+                              | {{ course.duration }} Total Hours. {{ course.lectures }} Lectures. {{ course.level }}
+                          </span>
+                      </div>
+                      <div class="course-creator">
+                          <img src="{{ course.instructor.image.url }}" alt="{{ course.instructor.name }}" class="instructor-img"/>
+                          <span> Created by <a href="#">{{ course.instructor.name }}</a></span>
+                      </div>
+                      <p class="languages">
+                          <img src="{% static 'images/globe-02 (1).png' %}" alt="Languages" class="icon"/>
+                          Languages:
+                          {% for language in course.languages.all %}
+                              {{ language.name }}{% if not forloop.last %}, {% endif %}
+                          {% endfor %}
+                      </p>
+                  </div>
+              </div>
+  
+              <div class="right">
+                  <div class="purchase-section">
+                      <div class="course-image">
+                          <img src="{{ course.image.url }}" alt="{{ course.title }}" />
+                      </div>
+                      
+                      <!-- Discounted Price Section -->
+                      <div class="course-price">
+                          <span class="current-price">${{ discounted_price }}</span>
+                          <span class="original-price"><s>${{ course.price }}</s></span>
+                          <span class="discount">50% Off</span>
+                      </div>
+  
+                      <button class="add-to-cart">Add to Cart</button>
+                      <button class="buy-now">Buy Now</button>
+                      <hr class="line2"/>
+                      <div class="share-icons">
+                          <p>Share:</p>
+                          <a href="#"><img src="{% static 'images/social-media.png.png' %}" alt="Facebook"/></a>
+                          <a href="#"><img src="{% static 'images/github.png.png' %}" alt="GitHub"/></a>
+                          <a href="#"><img src="{% static 'images/google.png.png' %}" alt="Google"/></a>
+                          <a href="#"><img src="{% static 'images/twitter.png.png' %}" alt="Twitter"/></a>
+                          <a href="#"><img src="{% static 'images/window.png.png' %}" alt="Windows"/></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>   
+    <section class="course-tabs">
+      <div class="wrapper">
+        <div class="course-tabs">
+          <button class="tab-button">Description</button>
+          <button class="tab-button">Instructor</button>
+          <button class="tab-button">Syllabus</button>
+          <button class="tab-button">Reviews</button>
+      </div>
+      <hr class="line"/>
+      <section class="course-details"id="description">
+        <!-- Course Description -->
+        <div class="course-description">
+            <h2>Course Description</h2>
+            <p>
+                This interactive e-learning course will introduce you to User Experience (UX) design, 
+                the art of creating products and services that are intuitive, enjoyable, and user-friendly. 
+                Gain a solid foundation in UX principles and learn to apply them in real-world scenarios 
+                through engaging modules and interactive exercises.
+            </p>
+        </div>     
+        <!-- Certification -->
+        <div class="course-certification">
+            <h3>Certification</h3>
+            <p>
+                At Byway, we understand the significance of formal recognition for your hard work and 
+                dedication to continuous learning. Upon successful completion of our courses, you will 
+                earn a prestigious certification that not only validates your expertise but also opens 
+                doors to new opportunities in your chosen field.
+            </p>
+        </div>
+    <hr class="line"/>
+      </div> 
+    </div>
+ </section>
+    <section class="course-instructor" id="instructor">
+      <div class="wrapper">
+      <h3>Instructor</h3>
+        <div class="instructor-info">
+          <h4><a href="#" class="instructor-name">Ronald Richards</a></h4>
+          <p>ASTROLOGY</p>
+          <div class="instructor-image">
+            <div class="instructor-man">
+            <a href="#">
+              <img src="{% static 'images/lecture0.1.jpg' %}" alt="instructor" />
+            </a>
+          </div>
+            <div class="instructor-meta">
+              <span>
+                <a href="#"><img src="{% static 'images/assets/Icon (1).svg' %}" alt="reviews" /></a>
+                40,445 Reviews
+              </span>
+              <span>
+                <a href="#"><img src="{% static 'images/Icon (1).png' %}" alt="students" /></a>
+                40 Students
+              </span>
+              <span>
+                <a href="#"><img src="{% static 'images/Icon (2).png' %}" alt="courses" /></a>
+                4 Courses
+              </span>
+            </div>
+          </div>
+          <p class="meta-description">
+            With over a decade of industry experience, Ronald brings a wealth of practical knowledge to the classroom.
+             He has played a pivotal role in designing user-centric interfaces for renowned tech companies,
+             ensuring seamless and engaging user experiences.
+          </p>
+          <hr class="line"/>
+        </div>
+      </div>
+      <section class="course-syllabus"id="syllabus">
+        <div class="wrapper">
+          <h3>Syllabus</h3>
+          <div class="syllabus">
+            <div class="syllabus-item">
+              <span class="arrow"></span>
+              <h4>Introduction to Statistics</h4>
+              <p>5 Lessons · 3 hour</p>
+              <div class="lesson-details">
+                <ul>
+                    <li>Lesson 1: Data Types</li>
+                    <li>Lesson 2: Probability</li>
+                    <li>Lesson 3: Distributions</li>
+                    <li>Lesson 4: Regression</li>
+                    <li>Lesson 5: Hypothesis Testing</li>
+                </ul>
+            </div>
+            </div>
+            <div class="syllabus-item">
+              <span class="arrow"></span>
+              <h4>Introductory Organic Chemistry</h4>
+              <p>5 Lessons · 7.5 hour</p>
+              <div class="lesson-details">
+                <ul>
+                    <li>Lesson 1: Introduction to Organic Chemistry</li>
+                    <li>Lesson 2: Alkanes and Alkenes</li>
+                    <li>Lesson 3: Functional Groups</li>
+                    <li>Lesson 4: Reactions and Mechanisms</li>
+                    <li>Lesson 5: Spectroscopy</li>
+                </ul>
+            </div>
+            </div>
+            <div class="syllabus-item">
+              <span class="arrow"></span>
+              <h4>The Complete Physics Course</h4>
+              <p>5 Lessons · 22 hour</p>
+              <div class="lesson-details">
+                <ul>
+                    <li>Lesson 1: What is Physics?</li>
+                    <li>Lesson 2:  Branches of Physics (Classical, Modern, Quantum)</li>
+                    <li>Lesson 3: Scientific Method and Experimentation</li>
+                    <li>Lesson 4: Kinematics: Motion in One and Two Dimensions</li>
+                    <li>Lesson 5:Heat Transfer (Conduction, Convection, Radiation)</li>
+                </ul>
+            </div>
+            </div>
+            <div class="syllabus-item">
+              <span class="arrow"></span>
+              <h4>The Complete JavaScript Course</h4>
+              <p>5 Lessons · 3.5 hour</p>
+              <div class="lesson-details">
+                <ul>
+                    <li>Lesson 1: JavaScript Basics (Variables, Data Types, Loops)</li>
+                    <li>Lesson 2: Functions and Scope</li>
+                    <li>Lesson 3: DOM Manipulation</li>
+                    <li>Lesson 4: Events and Event Listeners</li>
+                    <li>Lesson 5: Asynchronous JavaScript (Promises, Async/Await)</li>
+                </ul>
+            </div>
+            </div>
+          </div>
+          <hr class="line"/>
+        </div>
+
+        <div class="learner-reviews"id="reviews">
+          <div class="wrapper">
+            <div class="review-container">
+              
+              <!-- Ratings Section -->
+              <div class="rating-summary">
+                <h3>Learner Reviews</h3>
+                <div class="overall-rating">
+                  <span class="star">★</span>
+                  <span class="rating-number">4.6</span>
+                  <span>146,951 reviews</span>
+                </div>
+                <ul class="rating-breakdown">
+                  <li><span class="stars"><span class="filled">★★★★★</span><span class="empty"></span></span> 80%</li>
+                  <li><span class="stars"><span class="filled">★★★★</span><span class="empty">★</span></span> 10%</li>
+                  <li><span class="stars"><span class="filled">★★★</span><span class="empty">★★</span></span> 5%</li>
+                  <li><span class="stars"><span class="filled">★★</span><span class="empty">★★★</span></span> 3%</li>
+                  <li><span class="stars"><span class="filled">★</span><span class="empty">★★★★</span></span> 2%</li>
+                </ul>                
+              </div>
+        
+              <!-- Reviews List Section -->
+              <div class="review-list">
+                <!-- Review 1 -->
+                <div class="review">
+                  <div class="review-heading">
+                    <a href="#"><img src="{% static 'images/assets/span-3.svg' %}" alt="review" /></a>
+                    <h4>John Doe</h4>
+                  </div>
+                  <div class="review-details">
+                    <div class="description-ratings">
+                      <p class="main-star">★★★</p>
+                      <p>5 </p>
+                      <p class="para">Reviewed on 2rd  March, 2024</p>
+                      </div>
+                    <p class="para">The instructor was fantastic! They broke down complex concepts into digestible pieces. The real-world examples really helped solidify my understanding.</p>
+                  </div>
+                </div>
+        
+                <!-- Review 2 -->
+                <div class="review">
+                  <div class="review-heading">
+                    <a href="#"><img src="{% static 'images/assets/span-2.svg' %}" alt="review" /></a>
+                    <h4>John Doe</h4>
+                  </div>
+                  <div class="review-details">
+                    <div class="description-ratings">
+                      <p class="main-star">★</p>
+                       <p>5 </p>
+                      <p class="para">Reviewed on 22nd april, 2024</p>
+                      </div>
+                    <p class="para"> "This course exceeded my expectations! The content was well-organized, and the instructor’s explanations were clear and concise.
+                       I appreciated the interactive assignments which made learning enjoyable."</p>
+                  </div>
+                </div>
+                <!-- Review 3 -->
+                <div class="review">
+                  <div class="review-heading">
+                    <a href="#"><img src="{% static 'images/assets/span-1.svg' %}" alt="review" /></a>
+                    <h4>John Doe</h4>
+                  </div>
+                  <div class="review-details">
+                    <div class="description-ratings">
+                      <p class="main-star">★</p>
+                       <p>5 </p>
+                      <p class="para">Reviewed on 22nd april, 2024</p>
+                      </div>
+                    <p class="para"> "This course exceeded my expectations! The content was well-organized, and the instructor’s explanations were clear and concise.
+                       I appreciated the interactive assignments which made learning enjoyable."</p>
+                  </div>
+                </div>
+                <!-- Review 4 -->
+                <div class="review hidden">
+                  <div class="review-heading">
+                    <a href="#"><img src="{% static 'images/assets/span-4.svg' %}" alt="review" /></a>
+                    <h4>John Doe</h4>
+                  </div>
+                  <div class="review-details">
+                    <div class="description-ratings">
+                      <p class="main-star">★</p>
+                       <p>5 </p>
+                      <p class="para">Reviewed on 22nd april, 2024</p>
+                      </div>
+                    <p class="para"> "This course exceeded my expectations! The content was well-organized, and the instructor’s explanations were clear and concise.
+                       I appreciated the interactive assignments which made learning enjoyable."</p>
+                  </div>
+                </div>
+                <!-- Review 5 -->
+                <div class="review hidden">
+                  <div class="review-heading">
+                    <a href="#"><img src="{% static 'images/assets/span-4.svg' %}" alt="review" /></a>
+                    <h4>John Doe</h4>
+                  </div>
+                  <div class="review-details">
+                    <div class="description-ratings">
+                      <p class="main-star">★</p>
+                       <p>5 </p>
+                      <p class="para">Reviewed on 22nd april, 2024</p>
+                      </div>
+                    <p class="para"> "This course exceeded my expectations! The content was well-organized, and the instructor’s explanations were clear and concise.
+                       I appreciated the interactive assignments which made learning enjoyable."</p>
+                  </div>
+                </div>
+        
+                <!-- Review 6 -->
+                <div class="review hidden">
+                  <div class="review-heading">
+                    <a href="#"><img src="{% static 'images/assets/span-5.svg' %}" alt="review" /></a>
+                    <h4>John Doe</h4>
+                  </div>
+                  <div class="review-details">
+                    <div class="description-ratings">
+                    <p class="main-star">★★★</p>
+                    <p>5 </p>
+                    <p class="para">Reviewed on 21th March, 2024</p>
+                    </div>
+                    <p class="para">"I absolutely loved the course! The instructor was engaging and explained everything in a way that was easy to follow.
+                       I feel much more confident in my skills now. Highly recommended!"</p>
+                  </div>
+                </div>
+
+                <button class="view-more" id="loadMoreBtn">Load More Reviews</button>
+                <button class="view-more" id="showLessBtn" style="display:none;">Show Less</button>
+          </div>
+        
+        </div>
+      </div>
+        </div>        
+      </div>        
+      </section> 
+      <section id="testimonial">
+        <div class="wrapper">
+          <div class="frame-heading">
+            <h1>What our customers say About us</h1>
+            <div class="button-container">
+              <div class="button-left">
+                <a href="#" id="prevBtn"
+                  ><img
+                    src="{% static 'images/left-chevron.png' %}"
+                    alt="left-chevron"
+                /></a>
+              </div>
+              <div class="button-right">
+                <a href="#" id="nextBtn"
+                  ><img
+                    src="{% static 'images/chevron-right.png' %}"
+                    alt="right-chevron"
+                /></a>
+              </div>
+            </div>
+          </div>
+          <div class="main-quotes">
+            <div class="qotues ">
+              <img
+                src="{% static 'images/ri_double-quotes-l.png' %}"
+                alt="quote-icon"
+                class="coma-image"
+              />
+              <p>
+                "Byway's tech courses are top-notch! As someone who's always
+                looking to stay ahead in the rapidly evolving tech world, I
+                appreciate the up-to-date content and engaging multimedia."
+              </p>
+              <div class="bottom-end">
+                <a href="#"
+                  ><img
+                    src="{% static 'images/Ellipse 5 (1).png' %}"
+                    alt="customer-image"
+                /></a>
+                <ul>
+                  <li>Jane Doe</li>
+                  <li>Designer</li>
+                </ul>
+              </div>
+            </div>
+            <div class="qotues ">
+              <img
+                src="{% static 'images/ri_double-quotes-l.png' %}"
+                alt="quote-icon"
+                class="coma-image"
+              />
+              <p>
+                "I’ve taken many courses, but the instructor in the Development
+                series truly stands out. Their ability to explain complicated
+                concepts with simplicity and clarity is unmatched. A true
+                professional!"
+              </p>
+              <div class="bottom-end">
+                <a href="#"
+                  ><img
+                    src="{% static 'images/assets/span-5.svg' %}"
+                    alt="customer-image"
+                /></a>
+                <ul>
+                  <li>Mane Sue</li>
+                  <li>Developer</li>
+                </ul>
+              </div>
+            </div>
+  
+            <div class="qotues ">
+              <img
+                src="{% static 'images/ri_double-quotes-l.png' %}"
+                alt="quote-icon"
+                class="coma-image"
+              />
+              <p>
+                "This science course sparked my curiosity. I loved the experiments
+                and the interactive approach to learning.Good balance of theory
+                and practice. More quizzes could help reinforce the learning
+                material."
+              </p>
+              <div class="bottom-end">
+                <a href="#"
+                  ><img
+                    src="{% static 'images/assets/span-6.svg' %}"
+                    alt="customer-image"
+                /></a>
+                <ul>
+                  <li>babun Doe</li>
+                  <li>Astrologist</li>
+                </ul>
+              </div>
+            </div>
+  
+            <div class="qotues hidden">
+              <img
+                src="{% static 'images/ri_double-quotes-l.png' %}"
+                alt="quote-icon"
+                class="coma-image"
+              />
+              <p>
+                "Mind-blowing course! The instructor made difficult physics
+                concepts simple and fun. Great for anyone with an interest in
+                science."
+              </p>
+              <div class="bottom-end">
+                <a href="#"
+                  ><img
+                    src="{% static 'images/assets/span-3.svg' %}"
+                    alt="customer-image"
+                /></a>
+                <ul>
+                  <li>Santa Moe</li>
+                  <li>Digital Marketer</li>
+                </ul>
+              </div>
+            </div>
+  
+            <div class="qotues hidden">
+              <img
+                src="{% static 'images/ri_double-quotes-l.png' %}"
+                alt="quote-icon"
+                class="coma-image"
+              />
+              <p>
+                "A must for anyone dealing with data. The explanations were clear, 
+                and I now feel confident in analyzing large datasets."
+              </p>
+              <div class="bottom-end">
+                <a href="#"
+                  ><img
+                    src="{% static 'images/assets/span-2.svg' %}"
+                    alt="customer-image"
+                /></a>
+                <ul>
+                  <li>Ramesh Rj</li>
+                  <li>Statistician</li>
+                </ul>
+              </div>
+            </div>
+            <div class="qotues hidden">
+              <img
+                src="{% static 'images/ri_double-quotes-l.png' %}"
+                alt="quote-icon"
+                class="coma-image"
+              />
+              <p>
+                "I had some doubts before starting this course, but the
+                instructor’s consistent support and encouragement throughout the
+                lessons were amazing.!"
+              </p>
+              <div class="bottom-end">
+                <a href="#"
+                  ><img
+                    src="{% static 'images/assets/span-1.svg' %}"
+                    alt="customer-image"
+                /></a>
+                <ul>
+                  <li>Ahmmed Balui</li>
+                  <li>Life Coach</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>      
+       <section id="top-course">
+        <div class="wrapper">
+            <section class="container-last">
+                <div class="section-header">
+                    <h2>Top Courses</h2>
+                    <a href="{% url 'courses' %}">See All</a>
+                </div>
+                <div class="box-grid">
+                    {% if random_courses %}
+                        {% for course in random_courses %}
+                            <div class="course-grid"
+                            style="
+                            height: 300px; 
+                        "
+                    >
+                    <a href="{% url 'course_detail' course.id %}">
+                                <img src="{{ course.image.url }}" alt="{{ course.title }} Image" />
+                                <h3>{{ course.title }}</h3>
+                                <p>{{ course.instructor }}</p>
+                                <div class="rating">
+                                    <span>⭐⭐⭐⭐⭐</span> ({{ course.ratings }} Ratings)
+                                </div>
+                                <p>
+                                    {{ course.duration }} Total hours. {{ course.lectures }} lectures. {{ course.level }}
+                                </p>
+                                <p style="color: black; font-weight: bold; font-size: 20px">
+                                    ${{ course.price }}
+                                </p>
+                              </a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No top courses available for this category. Please explore other categories.</p>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </section>  
+</section>  
+<footer>
+  <section id="footer-section">
+    <div class="wrapper">
+      <div class="main-footer">
+        <div class="footer-section">
+          <a href="#">
+            <img src="{% static 'images/image 4.png' %}" alt="head" />
+          </a>
+          <p class="pfooter">
+            Empowering learners through accessible and engaging online
+            <br />education.<br />
+            Byway is a leading online learning platform dedicated to<br />
+            providing high-quality, flexible, and affordable educational<br />
+            experiences.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Get Help</h3>
+          <br />
+          <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Latest Articles</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Programs</h3>
+          <br />
+          <ul>
+            <li><a href="#">Art & Design</a></li>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">IT & Software</a></li>
+            <li><a href="#">Languages</a></li>
+            <li><a href="#">Programming</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <div class="down-footer">
+            <h3>Contact Us</h3>
+            <br />
+            <p>Address: 123 Main Street, Anytown, CA 12345</p>
+            <p>Tel: +1(123) 456-7890</p>
+            <p>Email: bywayedu@webkul.in</p>
+          </div>
+          <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank">
+              <img
+                src="{% static 'images/social-media.png.png' %}"
+                alt="image"
+              />
+            </a>
+            <a href="https://github.com" target="_blank">
+              <img src="{% static 'images/github.png.png' %}" alt="image" />
+            </a>
+            <a href="https://www.google.co.in/" target="_blank">
+              <img src="{% static 'images/google.png.png' %}" alt="image" />
+            </a>
+            <a href="https://x.com/?lang=en" target="_blank">
+              <img
+                src="{% static 'images/twitter.png.png' %}"
+                alt="image"
+              />
+            </a>
+            <a
+              href="https://www.microsoft.com/software-download/windows11"
+              target="_blank"
+            >
+              <img src="{% static 'images/window.png.png' %}" alt="image" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>  
+</section>  
+<script src="{% static 'detail.js' %}" defer></script>
+</body>
+</html>
+

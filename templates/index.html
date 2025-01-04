@@ -1,0 +1,510 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ByWay</title>
+
+    <link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'images/assets/logo.svg' %}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:image" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <div class="logo">
+          <a href="#">
+            <div class="bg1">
+              <img src="{% static 'images/assets/logo.svg' %}" alt="Logo" />
+            </div>
+            <h1>Byway</h1>
+          </a>
+        </div>
+        <div class="right">
+          <div class="menu-icon"><i class="fas fa-bars"></i></div>
+          <div class="close-icon" style="display: none">
+            <i class="fa-solid fa-square-xmark"></i>
+          </div>
+          <ul>
+            <li class="cart">
+              <a href="#"
+                ><img src="{% static 'images/frame42.png' %}" alt="Cart"
+              /></a>
+            </li>
+            <li class="navlinks">
+              <a href="#"><button id="button-log">Log In</button></a>
+            </li>
+            <li class="navlinks-log">
+              <a href="#"><button id="button-sign">Sign Up</button></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    {% block content %} {% endblock %}
+    <section id="spotlight">
+      <div class="wrapper">
+        <div class="container">
+          <div class="left-spotlight">
+            <h1>
+              unlock your potential<br />
+              with byway
+            </h1>
+            <p>
+              Welcome to ByWay, where learning knows no bounds. We believe
+              that<br />
+              education is the key to personal and professional growth and
+              we're<br />
+              here to guide you on your journey to success.
+            </p>
+            <button class="button">Start your instructor journey</button>
+          </div>
+          <div class="right-spotlight">
+            <img
+              src="{% static 'images/spotlight.png' %}"
+              alt="Spotlight Image"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="details">
+      <div class="wrapper">
+        <div class="items">
+          <div class="top-item">
+            <h2>250+</h2>
+            <p>Courses by our best mentors</p>
+            <img src="{% static 'images/assets/line.png' %}" alt="" />
+          </div>
+          <div class="top-item">
+            <h2>1000+</h2>
+            <p>Courses by our best mentors</p>
+            <img src="{% static 'images/assets/line.png' %}" alt="" />
+          </div>
+          <div class="top-item">
+            <h2>150+</h2>
+            <p>Courses by our best mentors</p>
+            <img src="{% static 'images/assets/line.png' %}" alt="" />
+          </div>
+          <div class="top-item">
+            <h2>2400+</h2>
+            <p>Courses by our best mentors</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="middle-section">
+      <div class="wrapper">
+        <div class="container-heading">
+          <h2>Top Categories</h2>
+          <span>
+            <a href="#" id="toggle-btn">See All</a>
+          </span>
+        </div>
+        <div class="category">
+          <div class="category-grid">
+            {% for category in categories %}
+            <div
+              class="category-item {% if forloop.counter > 4 %}hidden-category{% endif %}"
+            >
+              <a href="{% url 'category_details' category.id %}">
+                <img src="{{ category.icon.url }}" alt="{{ category.title }}" />
+                <p>{{ category.title }}</p>
+                <span>{{ category.description }}</span>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="top-course">
+      <div class="wrapper">
+        <section class="container-last">
+          <div class="section-header">
+            <h2>Top Courses</h2>
+            <a href="{% url 'courses' %}">See All</a>
+          </div>
+          <div class="box-grid">
+            {% if top_courses %} {% for course in top_courses %}
+            <div class="course-grid">
+              <a href="{% url 'course_detail' course.id %}">
+              <img
+                src="{{ course.image.url }}"
+                alt="{{ course.title }} Image"
+              />
+              <h3>{{ course.title }}</h3>
+              <p>{{ course.instructor }}</p>
+              <div class="rating">
+                <span>⭐⭐⭐⭐⭐</span> ({{ course.ratings }} Ratings)
+             
+              </div>
+              <p>
+                {{ course.duration }} Total hours. {{ course.lectures }}
+                lectures. {{ course.level }}
+              </p>
+              <p style="color: black; font-weight: bold; font-size: 20px">
+                ${{ course.price }}
+              </p>
+            </a>
+            </div>
+            {% endfor %} {% else %}
+            <p>
+              No top courses available for this category.Please explore other
+              categories.
+            </p>
+            {% endif %}
+          </div>
+        </section>
+      </div>
+    </section>
+    <section class="top-instructors">
+      <div class="wrapper">
+        <div class="section-header">
+          <h2>Top Instructors</h2>
+          <button id="seeAllButton">See All</button>
+        </div>
+        <div id="instructorGrid" class="instructor-grid">
+          {% if instructors %} {% for instructor in instructors %}
+          <a href="{% url 'instructor_detail' instructor.id %}" class="instructor-link">
+            <div class="instructor-card {% if forloop.counter > 5 %}hidden-instructor{% endif %}">
+              {% if instructor.image %}
+                <img src="{{ instructor.image.url }}" alt="{{ instructor.name }}" />
+              {% else %}
+                <img src="{% static 'images/default.png' %}" alt="Default Image" />
+              {% endif %}
+              <h3>{{ instructor.name }}</h3>
+              <p>{{ instructor.title }}</p>
+              <ul>
+                <li class="rating">
+                  <img src="{% static 'images/icon.png' %}" alt="Star" />
+                  <span>
+                    {% if instructor.rating %}
+                      {{ instructor.rating|floatformat:1 }}
+                    {% else %}
+                      N/A
+                    {% endif %}
+                  </span>
+                </li>
+                <li class="students">
+                  {{ instructor.students|default:"0" }} Students
+                </li>
+              </ul>
+            </div>
+          </a>
+        {% endfor %}
+      {% else %}
+        <p>No instructors available.</p>
+      {% endif %}
+        </div>
+      </div>
+    </section>
+    <section id="testimonial">
+      <div class="wrapper">
+        <div class="frame-heading">
+          <h1>What our customers say About us</h1>
+          <div class="button-container">
+            <div class="button-left">
+              <a href="#" id="prevBtn"
+                ><img
+                  src="{% static 'images/left-chevron.png' %}"
+                  alt="left-chevron"
+              /></a>
+            </div>
+            <div class="button-right">
+              <a href="#" id="nextBtn"
+                ><img
+                  src="{% static 'images/chevron-right.png' %}"
+                  alt="right-chevron"
+              /></a>
+            </div>
+          </div>
+        </div>
+        <div class="main-quotes">
+          <div class="qotues hidden">
+            <img
+              src="{% static 'images/ri_double-quotes-l.png' %}"
+              alt="quote-icon"
+              class="coma-image"
+            />
+            <p>
+              "Byway's tech courses are top-notch! As someone who's always
+              looking to stay ahead in the rapidly evolving tech world, I
+              appreciate the up-to-date content and engaging multimedia."
+            </p>
+            <div class="bottom-end">
+              <a href="#"
+                ><img
+                  src="{% static 'images/Ellipse 5 (1).png' %}"
+                  alt="customer-image"
+              /></a>
+              <ul>
+                <li>Jane Doe</li>
+                <li>Designer</li>
+              </ul>
+            </div>
+          </div>
+          <div class="qotues hidden">
+            <img
+              src="{% static 'images/ri_double-quotes-l.png' %}"
+              alt="quote-icon"
+              class="coma-image"
+            />
+            <p>
+              "I’ve taken many courses, but the instructor in the Development
+              series truly stands out. Their ability to explain complicated
+              concepts with simplicity and clarity is unmatched. A true
+              professional!"
+            </p>
+            <div class="bottom-end">
+              <a href="#"
+                ><img
+                  src="{% static 'images/assets/span-5.svg' %}"
+                  alt="customer-image"
+              /></a>
+              <ul>
+                <li>Mane Sue</li>
+                <li>Developer</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="qotues hidden">
+            <img
+              src="{% static 'images/ri_double-quotes-l.png' %}"
+              alt="quote-icon"
+              class="coma-image"
+            />
+            <p>
+              "This science course sparked my curiosity. I loved the experiments
+              and the interactive approach to learning.Good balance of theory
+              and practice also fantastic classes love it."
+            </p>
+            <div class="bottom-end">
+              <a href="#"
+                ><img
+                  src="{% static 'images/assets/span-6.svg' %}"
+                  alt="customer-image"
+              /></a>
+              <ul>
+                <li>babun Doe</li>
+                <li>Astrologist</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="qotues hidden">
+            <img
+              src="{% static 'images/ri_double-quotes-l.png' %}"
+              alt="quote-icon"
+              class="coma-image"
+            />
+            <p>
+              "Mind-blowing course! The instructor made difficult physics
+              concepts simple and fun. Great for anyone with an interest in
+              science."
+            </p>
+            <div class="bottom-end">
+              <a href="#"
+                ><img
+                  src="{% static 'images/assets/span-3.svg' %}"
+                  alt="customer-image"
+              /></a>
+              <ul>
+                <li>Santa Moe</li>
+                <li>Digital Marketer</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="qotues hidden">
+            <img
+              src="{% static 'images/ri_double-quotes-l.png' %}"
+              alt="quote-icon"
+              class="coma-image"
+            />
+            <p>
+              "A must for anyone dealing with data. The explanations were clear, 
+              and I now feel confident in analyzing large datasets."
+            </p>
+            <div class="bottom-end">
+              <a href="#"
+                ><img
+                  src="{% static 'images/assets/span-2.svg' %}"
+                  alt="customer-image"
+              /></a>
+              <ul>
+                <li>Ramesh Rj</li>
+                <li>Statistician</li>
+              </ul>
+            </div>
+          </div>
+          <div class="qotues hidden">
+            <img
+              src="{% static 'images/ri_double-quotes-l.png' %}"
+              alt="quote-icon"
+              class="coma-image"
+            />
+            <p>
+              "I had some doubts before starting this course, but the
+              instructor’s consistent support and encouragement throughout the
+              lessons were amazing.!"
+            </p>
+            <div class="bottom-end">
+              <a href="#"
+                ><img
+                  src="{% static 'images/assets/span-1.svg' %}"
+                  alt="customer-image"
+              /></a>
+              <ul>
+                <li>Ahmmed Balui</li>
+                <li>Life Coach</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="feedback">
+      <div class="wrapper">
+        <div class="left-rightsection">
+          <div class="left-section">
+            <a href="#">
+              <img src="{% static 'images/image 10.png' %}" alt="head" />
+            </a>
+          </div>
+          <div class="right-section">
+            <h1>Become an Instructor</h1>
+            <p>
+              Instructors from around the world teach millions of students on
+              Byway.<br />We provide the tools and skills to teach what you
+              love.
+            </p>
+            <button class="button">
+              Start your instructor journey<img
+                src="{% static 'images/arrow-narrow-right.png' %}"
+                alt="arrow"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="last">
+      <div class="wrapper">
+        <div class="main-firstsecond">
+          <div class="first-section">
+            <h1>Transform your life through education</h1>
+            <p>
+              Learners around the world are launching new careers, advancing
+              in<br />their fields, and enriching their lives.
+            </p>
+            <button class="button">
+              Checkout courses<img
+                src="{% static 'images/arrow-narrow-right.png' %}"
+                alt="arrow"
+              /><br />
+            </button>
+          </div>
+          <div class="second-section">
+            <a href="#">
+              <img src="{% static 'images/Group 143.png' %}" alt="head" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <section id="footer-section">
+        <div class="wrapper">
+          <div class="main-footer">
+            <div class="footer-section">
+              <a href="#">
+                <img src="{% static 'images/image 4.png' %}" alt="head" />
+              </a>
+              <p class="pfooter">
+                Empowering learners through accessible and engaging online
+                <br />education.<br />
+                Byway is a leading online learning platform dedicated to<br />
+                providing high-quality, flexible, and affordable educational<br />
+                experiences.
+              </p>
+            </div>
+            <div class="footer-section">
+              <h3>Get Help</h3>
+              <br />
+              <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Latest Articles</a></li>
+                <li><a href="#">FAQ</a></li>
+              </ul>
+            </div>
+            <div class="footer-section">
+              <h3>Programs</h3>
+              <br />
+              <ul>
+                <li><a href="#">Art & Design</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">IT & Software</a></li>
+                <li><a href="#">Languages</a></li>
+                <li><a href="#">Programming</a></li>
+              </ul>
+            </div>
+            <div class="footer-section">
+              <div class="down-footer">
+                <h3>Contact Us</h3>
+                <br />
+                <p>Address: 123 Main Street, Anytown, CA 12345</p>
+                <p>Tel: +1(123) 456-7890</p>
+                <p>Email: bywayedu@webkul.in</p>
+              </div>
+              <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank">
+                  <img
+                    src="{% static 'images/social-media.png.png' %}"
+                    alt="image"
+                  />
+                </a>
+                <a href="https://github.com" target="_blank">
+                  <img src="{% static 'images/github.png.png' %}" alt="image" />
+                </a>
+                <a href="https://www.google.co.in/" target="_blank">
+                  <img src="{% static 'images/google.png.png' %}" alt="image" />
+                </a>
+                <a href="https://x.com/?lang=en" target="_blank">
+                  <img
+                    src="{% static 'images/twitter.png.png' %}"
+                    alt="image"
+                  />
+                </a>
+                <a
+                  href="https://www.microsoft.com/software-download/windows11"
+                  target="_blank"
+                >
+                  <img src="{% static 'images/window.png.png' %}" alt="image" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+    <script src="{% static 'script.js' %}" defer></script>
+  </body>
+</html>

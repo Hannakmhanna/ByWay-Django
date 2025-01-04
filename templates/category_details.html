@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<section id="category-details">
+    <div class="wrapper">
+        <h1>{{ category.title }}</h1>
+        <div class="courses">
+            {% for course in courses %}           
+                <div class="course-item"
+                style="
+                width:20%; 
+            "
+                >
+                    <a href="{% url 'course_detail' course.id %}">
+                    <img src="{{ course.image.url }}" alt="{{ course.title }}" />
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.instructor }}</p>
+                    <p>{{ course.duration }} | {{ course.lectures }} lectures | {{ course.level }}</p>
+                    <p>⭐⭐⭐⭐⭐ ({{ course.total_reviews }} Ratings)</p>
+                    <p><strong>${{ course.price }}</strong></p>
+                    <a/>
+                </div>
+            {% empty %}
+                <p>No courses found for this category.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

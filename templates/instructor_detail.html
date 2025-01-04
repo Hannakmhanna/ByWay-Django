@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<section id="instructor-details">
+    <div class="wrapper">
+        <h1>Courses by {{ instructor.name }}</h1>
+        <p>{{ instructor.title }}</p>
+
+        <div class="courses">
+            {% for course in courses %}
+                <div class="course-item">
+                    <img src="{{ course.image.url }}" alt="{{ course.title }}" />
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ instructor.name }}</p>
+                    <p>{{ course.duration }} | {{ course.lectures }} lectures | {{ course.level }}</p>
+                    <p>⭐⭐⭐⭐⭐ ({{ course.total_reviews }} Ratings)</p>
+                    <p><strong>${{ course.price }}</strong></p>
+                </div>
+            {% empty %}
+                <p>No courses available for this instructor.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ByWay</title>
+
+    <link rel="stylesheet" href="{% static 'courses.css' %}" type="text/css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'images/assets/logo.svg' %}"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:image" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <div class="logo">
+          <a href="#">
+            <div class="bg1">
+              <img src="{% static 'images/assets/logo.svg' %}" alt="Logo" />
+            </div>
+            <h1>Byway</h1>
+          </a>
+        </div>
+        <div class="right">
+          <div class="menu-icon"><i class="fas fa-bars"></i></div>
+          <div class="close-icon" style="display: none">
+            <i class="fa-solid fa-square-xmark"></i>
+          </div>
+          <ul>
+            <li class="cart">
+              <a href="#"
+                ><img src="{% static 'images/frame42.png' %}" alt="Cart"
+              /></a>
+            </li>
+            <li class="navlinks">
+              <a href="#"><button id="button-log">Log In</button></a>
+            </li>
+            <li class="navlinks-log">
+              <a href="#"><button id="button-sign">Sign Up</button></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <section id="courses-section">
+        <div class="wrapper">
+            <div class="container-heading">
+                <h2>All Courses</h2>
+            </div>
+            <div class="course-grid">
+                {% for course in all_courses %}
+                <div class="course-item">
+                  <a href="{% url 'course_detail' course.id %}">
+                        <img src="{{ course.image.url }}" alt="{{ course.title }}">
+                        <h3>{{ course.title }}</h3>  <!-- Dynamically display course title -->
+                        <p> {{ course.instructor }}</p>  <!-- Assuming your course model has an 'instructor' field -->
+                        <div class="rating">
+                            <span>⭐⭐⭐⭐⭐</span> ({{ course.ratings }} Ratings)  <!-- Assuming your course model has a 'ratings' field -->
+                        </div>
+                        <p>{{ course.duration }} Total hours. {{ course.lectures }} lectures. {{ course.level }}</p>  <!-- Assuming course has these fields -->
+                        <p style="color: black; font-weight: bold; font-size: 20px">${{ course.price }}</p>
+                    </a>
+                </div>
+                {% empty %}
+                <p>No courses available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>    
+
+    <footer>
+      <section id="footer-section">
+        <div class="wrapper">
+          <div class="main-footer">
+            <div class="footer-section">
+              <a href="#">
+                <img src="{% static 'images/image 4.png' %}" alt="head" />
+              </a>
+              <p class="pfooter">
+                Empowering learners through accessible and engaging online
+                <br />education.<br />
+                Byway is a leading online learning platform dedicated to<br />
+                providing high-quality, flexible, and affordable educational<br />
+                experiences.
+              </p>
+            </div>
+            <div class="footer-section">
+              <h3>Get Help</h3>
+              <br />
+              <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Latest Articles</a></li>
+                <li><a href="#">FAQ</a></li>
+              </ul>
+            </div>
+            <div class="footer-section">
+              <h3>Programs</h3>
+              <br />
+              <ul>
+                <li><a href="#">Art & Design</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">IT & Software</a></li>
+                <li><a href="#">Languages</a></li>
+                <li><a href="#">Programming</a></li>
+              </ul>
+            </div>
+            <div class="footer-section">
+              <div class="down-footer">
+                <h3>Contact Us</h3>
+                <br />
+                <p>Address: 123 Main Street, Anytown, CA 12345</p>
+                <p>Tel: +1(123) 456-7890</p>
+                <p>Email: bywayedu@webkul.in</p>
+              </div>
+              <div class="social-icons">
+                <a href="https://www.facebook.com" target="_blank">
+                  <img src="{% static 'images/social-media.png.png' %}" alt="image" />
+                </a>
+                <a href="https://github.com" target="_blank">
+                  <img src="{% static 'images/github.png.png' %}" alt="image" />
+                </a>
+                <a href="https://www.google.co.in/" target="_blank">
+                  <img src="{% static 'images/google.png.png' %}" alt="image" />
+                </a>
+                <a href="https://x.com/?lang=en" target="_blank">
+                  <img src="{% static 'images/twitter.png.png' %}" alt="image" />
+                </a>
+                <a href="https://www.microsoft.com/software-download/windows11" target="_blank">
+                  <img src="{% static 'images/window.png.png' %}" alt="image" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>    
+  </body>
+</html>
