@@ -941,6 +941,9 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
     height: auto;
     padding: 15px 0;
   }
+  .top-instructors .instructor-grid .instructor-card {
+    width: 158px;
+  }
 
   header .wrapper {
     display: flex;
@@ -967,7 +970,17 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
   header .wrapper {
     /* padding-left: 78px; */
   }
+  #button-log, #button-sign {
+    font-size: 16px;
+  }
+  header .wrapper .logo a h1{
+    font-size: 19px;
+  }
+  #spotlight .wrapper .container .left-spotlight p{
+    font-size: 16px;
+  }
 }
+
 @media (max-width: 360px) {
   /* Hamburger menu icon style */
   .menu-icon {
@@ -1089,9 +1102,7 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
     line-height: 42px;
   }
 
-  #spotlight .wrapper .container .left-spotlight p {
-    font-size: 14px;
-  }
+ 
 }
 @media (max-width: 1100px) {
   #spotlight .wrapper .container .left-spotlight h1 {
@@ -1249,8 +1260,10 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
     flex-wrap: wrap;
     justify-content: space-between;
   }
+ 
 
   #details .wrapper .top-item {
+    width: 24%;
   }
 
   #details .wrapper .top-item img {
@@ -1262,7 +1275,7 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
   }
 
   #details .wrapper .top-item p {
-    font-size: 11px;
+    font-size: 17px;
   }
 }
 
@@ -1302,7 +1315,7 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
   }
 
   #details .wrapper .top-item {
-    width: 130px;
+    width: 44%;
   }
 
   #details .wrapper .top-item h2 {
@@ -1456,7 +1469,7 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
 }
 @media (max-width: 480px) {
   #middle-section .wrapper .category .category-grid {
-    /* flex-direction: column; */
+    flex-direction: column;
   }
 
   #middle-section .wrapper .category .category-grid .category-item {
@@ -1499,7 +1512,7 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
     margin-top: 32px;
   }
   #middle-section .wrapper .category .category-grid .category-item {
-    width: 35%;
+    width: 82%;
   }
 }
 @media (max-width: 320px) {
@@ -1508,9 +1521,7 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
   }
 }
 @media (max-width: 1280px) {
-  #top-course .wrapper .container-last .box-grid {
-    gap: 20px;
-  }
+ 
   #top-course .wrapper .top-instructors .instructor-grid .instructor-card {
     height: 285px;
   }
@@ -1532,6 +1543,7 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
   #top-course .wrapper .container-last .box-grid {
     justify-content: space-between;
     gap: 20px;
+    flex-wrap: wrap;
   }
   #top-course .wrapper .top-instructors .instructor-grid .instructor-card h3 {
     font-size: 16px;
@@ -1542,7 +1554,7 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
   }
 
   #top-course .wrapper .container-last .course-grid {
-    width: 86%;
+    width: 28%;
     height: 65%;
   }
 }
@@ -1621,15 +1633,7 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
   }
 }
 @media (max-width: 980px) {
-  #top-course .wrapper .top-instructors .instructor-grid {
-    justify-content: center;
-    gap: 20px;
-  }
-
-  #top-course .wrapper .top-instructors .instructor-grid .instructor-card {
-    width: 45%;
-    height: 45%;
-  }
+  
   footer #footer-section .wrapper .footer-section {
     margin: 44px;
   }
@@ -1638,22 +1642,9 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
   }
 }
 @media (max-width: 768px) {
-  #top-course .wrapper .top-instructors .instructor-grid {
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  #top-course
-    .wrapper
-    .top-instructors
-    .instructor-grid
-    .instructor-card
-    .students {
-    font-size: 12px;
-  }
-
-  #top-course .wrapper .top-instructors .instructor-grid .instructor-card {
-    width: 26%;
-  }
+ 
+  
+ 
   footer #footer-section .wrapper .footer-section {
     margin: 38px;
   }
@@ -1661,40 +1652,24 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
     line-height: 24px;
   }
 }
-@media (max-width: 640px) {
-  #top-course .wrapper .top-instructors .section-header h2 {
-    margin-left: 65px;
+@media (max-width: 980px) {
+  .top-instructors .instructor-grid{
+    justify-content: center;
   }
+  
 }
 @media (max-width: 480px) {
-  #top-course .wrapper .top-instructors .section-header h2 {
-    font-size: 20px;
-  }
+ 
 
-  #top-course .wrapper .top-instructors .section-header a {
-    font-size: 14px;
-  }
-
-  #top-course .wrapper .top-instructors .instructor-grid .instructor-card {
-    width: 80%;
-    max-width: 250px;
-  }
+ 
 }
 @media (max-width: 360px) {
-  #top-course .wrapper .top-instructors .section-header h2 {
-    font-size: 20px;
-    margin: 2px;
-  }
-
-  #top-course .wrapper .top-instructors .section-header a {
-    font-size: 20px;
-    margin: 7px;
-  }
-
-  #top-course .wrapper .top-instructors .instructor-grid .instructor-card {
-    width: 90%;
-  }
+  .top-instructors .instructor-grid .instructor-card {
+    width: 246px;
+    height: 364px;
 }
+}
+
 @media (max-width: 1280px) {
   #testimonial .wrapper .main-quotes {
     gap: 16px;
@@ -1917,12 +1892,15 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
   }
 
   #feedback .right-section h1 {
-    font-size: 20px;
+    font-size: 22px;
+    width: 129%;
+    text-align: left;
   }
 
   #feedback .right-section p {
     font-size: 16px;
-    width: 100%;
+    width: 116%;
+    text-align: left;
   }
 
   #feedback .right-section .button {
@@ -1937,12 +1915,14 @@ footer #footer-section .wrapper .footer-section .social-icons a img {
 }
 @media (max-width: 320px) {
   #feedback .right-section .button {
-    padding: 16px 21px;
+    padding: 16px 15px;
     font-size: 13px;
+    width: 114%;
+
   }
 
   #feedback .right-section .button img {
-    right: -2px;
+    right: 2px;
   }
 }
 
